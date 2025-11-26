@@ -188,9 +188,15 @@ app.get("/user", authMiddleware, async (req, res) => {
         const user = await User.findOne({ where: { id: userID } });
         if (!user) {
             return res.status(404).json({ message: "User Not Found!" });
-        } else {
-            res.status(200).json([user]); // Returning array to match your previous findAll behavior
-        }
+        }  else {
+  // Instead of: res.status(200).json([user]);
+  res.status(200).json({
+    id: user.id,
+    name: user.name,
+    username: user.username,
+    email: user.email,
+  });
+}
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Internal Server Error!" });

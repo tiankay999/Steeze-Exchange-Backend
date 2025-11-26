@@ -51,10 +51,12 @@ const payStack = {
 
   verifyPayment: async (req, res) => {
     try {
+      console.log(1)
       const reference = req.params.reference;
       console.log('--- Starting Verification for Ref:', reference, '---');
-
+      
       const options = {
+
         hostname: 'api.paystack.co',
         port: 443,
         path: `/transaction/verify/${reference}`,
@@ -63,6 +65,8 @@ const payStack = {
           Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
         },
       };
+   console.log("22")
+
 
       const clientReq = https.request(options, (apiRes) => {
         let data = '';
@@ -124,14 +128,15 @@ const payStack = {
                 });
               }
               console.log('Wallet found/created:', wallet ? wallet.id : 'No wallet', 'Current Balance:', wallet ? wallet.balance : 'N/A');
-
+              console.log(wallet.balance)
               // make sure balance is a number (DECIMAL often comes as string)
               const currentBalance = Number(wallet.balance) || 0;
+              console.log(currenBalance)
               const newBalance = currentBalance + Number(actualAmount);
 
               await wallet.update({ balance: newBalance });
               console.log('Wallet updated. New Balance:', newBalance);
-
+               console.log(newBalance)
               // ✅ 4. Create transaction record (Sequelize style)
               const newTrans = await Transaction.create({
                 uid: user.id,

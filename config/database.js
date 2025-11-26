@@ -1,9 +1,14 @@
-const {Sequelize} =  require ('sequelize')
-const sequelize = new Sequelize('SteezeExchange', 'root', 'root', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port:3306,          
-    
+const { Sequelize } = require("sequelize");
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "mysql",
+  logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 });
 
-module.exports = {sequelize};
+module.exports = { sequelize };
