@@ -22,7 +22,7 @@ dotenv.config();
 
 // ✅ CORS MUST be defined BEFORE your routes
 const corsOptions = {
-  origin: "https://vercel.com/homefinder/steeze-exchange/GvTantgktAmq7PkkRgWYKaxWx4di", // Your Next.js frontend URL
+  origin: "steeze-exchange.vercel.app", // Your Next.js frontend URL
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
