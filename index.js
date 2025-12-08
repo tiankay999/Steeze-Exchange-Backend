@@ -16,19 +16,17 @@ const fs = require('fs');
 // Load environment variables
 dotenv.config();
 
-// ==========================================
-// 1. MIDDLEWARE (MUST BE AT THE TOP)
-// ==========================================
 
-// ✅ CORS MUST be defined BEFORE your routes
+
+//  this is my cors 
 const corsOptions = {
-  origin: "steeze-exchange.vercel.app", // Your Next.js frontend URL
+ origin: "https://steeze-exchange.vercel.app", 
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
 
-// Apply CORS globally
+// Applys CORS globally
 app.use(cors(corsOptions));
 
 // Body parsers
@@ -36,9 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-// ==========================================
-// 2. ROUTES
-// ==========================================
+
 
 // Mount external routes
 const router = require('./routes/route');
